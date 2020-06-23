@@ -14,7 +14,7 @@ To run the example project; clone the repo, and run `pod install` from the Proje
 YouTube-Player-iOS-Helper is available through [CocoaPods](http://cocoapods.org). To install
 the library, add the following line to your Podfile and replace "x.y.z" with the latest version.
 
-    pod "youtube-ios-player-helper", "~> x.y.z"
+		pod "youtube-ios-player-helper", :git => 'https://github.com/Rodrigoplp/youtube-ios-player-helper.git'
 
 After installing in your project and opening the workspace, to use the library:
 
