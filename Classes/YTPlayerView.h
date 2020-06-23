@@ -141,6 +141,13 @@ typedef void (^YTPlaybackQualityCompletionHandler)(YTPlaybackQuality result,
  */
 - (nullable UIView *)playerViewPreferredInitialLoadingView:(nonnull YTPlayerView *)playerView;
 
+/**
+* Callback invoked when link to external URL is intercepted
+*
+* @param url The external URL
+*/
+- (void)selectedVideoForUrl:(nonnull NSURL *)url;
+
 @end
 
 /**

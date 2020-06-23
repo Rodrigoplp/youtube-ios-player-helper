@@ -524,8 +524,10 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     return;
   } else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
     if ([self handleHttpNavigationToUrl:request.URL]) {
+        [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
       decisionHandler(WKNavigationActionPolicyAllow);
     } else {
+        [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
       decisionHandler(WKNavigationActionPolicyCancel);
     }
     return;
@@ -694,13 +696,13 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch) {
     return YES;
   } else {
-    [[UIApplication sharedApplication] openURL:url
-                                       options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO}
-                             completionHandler:nil];
-    return NO;
+    // Formerly redirected to external URL and returned "NO". Now informs delegate of link to 
+    // external URL and takes no further action.
+    [self.delegate selectedVideoForUrl: url];
+      
+    return YES;
   }
 }
-
 
 /**
  * Private helper method to load an iframe player with the given player parameters.
